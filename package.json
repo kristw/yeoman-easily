@@ -24,7 +24,8 @@
     "lodash": "^4.13.1"
   },
   "peerDependencies": {
-    "yeoman-generator": "^0.24.1"
+    "yeoman-generator": "^0.24.1",
+    "yosay": "^1.2.0"
   },
   "devDependencies": {
     "babel-core": "^6.11.4",
@@ -48,7 +49,8 @@
     "isparta": "^4.0.0",
     "yeoman-assert": "^2.2.1",
     "yeoman-generator": "^0.24.1",
-    "yeoman-test": "^1.4.0"
+    "yeoman-test": "^1.4.0",
+    "yosay": "^1.2.0"
   },
   "eslintConfig": {
     "extends": "xo-space",
