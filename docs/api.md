@@ -7,18 +7,21 @@ Class that provides convenient functions for a Yeoman generator.
 
 * [Easily](#Easily)
     * [new Easily(generator)](#new_Easily_new)
-    * [.greet(message)](#Easily+greet) ⇒ <code>[Easily](#Easily)</code>
-    * [.confirmBeforeStart(message)](#Easily+confirmBeforeStart) ⇒ <code>[Easily](#Easily)</code>
-    * [.checkForConfirmation()](#Easily+checkForConfirmation) ⇒ <code>boolean</code>
-    * [.setResolver(resolve)](#Easily+setResolver) ⇒ <code>[Easily](#Easily)</code>
-    * [.composeWithLocal(namespace, options)](#Easily+composeWithLocal) ⇒ <code>[Easily](#Easily)</code>
-    * [.composeWithExternal(packageName, namespace, options)](#Easily+composeWithExternal) ⇒ <code>[Easily](#Easily)</code>
-    * [.readTemplate(filePath, options)](#Easily+readTemplate) ⇒ <code>string</code>
-    * [.readDestination(filePath, options)](#Easily+readDestination) ⇒ <code>string</code>
-    * [.readTemplateJSON(filePath)](#Easily+readTemplateJSON) ⇒ <code>object</code>
-    * [.readDestinationJSON(filePath)](#Easily+readDestinationJSON) ⇒ <code>object</code>
-    * [.write(filePath, contents)](#Easily+write) ⇒ <code>[Easily](#Easily)</code>
-    * [.savePropsToConfig()](#Easily+savePropsToConfig) ⇒ <code>[Easily](#Easily)</code>
+    * _instance_
+        * [.greet(message)](#Easily+greet) ⇒ <code>[Easily](#Easily)</code>
+        * [.confirmBeforeStart(message)](#Easily+confirmBeforeStart) ⇒ <code>[Easily](#Easily)</code>
+        * [.checkForConfirmation()](#Easily+checkForConfirmation) ⇒ <code>boolean</code>
+        * [.setResolver(resolve)](#Easily+setResolver) ⇒ <code>[Easily](#Easily)</code>
+        * [.composeWithLocal(namespace, options)](#Easily+composeWithLocal) ⇒ <code>[Easily](#Easily)</code>
+        * [.composeWithExternal(packageName, namespace, options)](#Easily+composeWithExternal) ⇒ <code>[Easily](#Easily)</code>
+        * [.readTemplate(filePath, options)](#Easily+readTemplate) ⇒ <code>string</code>
+        * [.readDestination(filePath, options)](#Easily+readDestination) ⇒ <code>string</code>
+        * [.readTemplateJSON(filePath)](#Easily+readTemplateJSON) ⇒ <code>object</code>
+        * [.readDestinationJSON(filePath)](#Easily+readDestinationJSON) ⇒ <code>object</code>
+        * [.write(filePath, contents)](#Easily+write) ⇒ <code>[Easily](#Easily)</code>
+        * [.savePropsToConfig()](#Easily+savePropsToConfig) ⇒ <code>[Easily](#Easily)</code>
+    * _static_
+        * [.createGenerator(config)](#Easily.createGenerator) ⇒ <code>Generator</code>
 
 <a name="new_Easily_new"></a>
 
@@ -78,7 +81,7 @@ to resolve path correctly
 <a name="Easily+composeWithLocal"></a>
 
 ### easily.composeWithLocal(namespace, options) ⇒ <code>[Easily](#Easily)</code>
-Compose with a local generator within the same package
+Compose with a local subgenerator within the same package
 
 **Kind**: instance method of <code>[Easily](#Easily)</code>  
 **Returns**: <code>[Easily](#Easily)</code> - this  
@@ -99,7 +102,7 @@ Compose with a generator from another package
 | Param | Type | Description |
 | --- | --- | --- |
 | packageName | <code>string</code> | package name of the generator |
-| namespace | <code>string</code> | namespace for the called generator to operate in |
+| namespace | <code>string</code> | namespace for the called generator to operate in. |
 | options | <code>object</code> | options to pass to the generator |
 
 <a name="Easily+readTemplate"></a>
@@ -172,3 +175,20 @@ Save all props to configuration
 
 **Kind**: instance method of <code>[Easily](#Easily)</code>  
 **Returns**: <code>[Easily](#Easily)</code> - this  
+<a name="Easily.createGenerator"></a>
+
+### Easily.createGenerator(config) ⇒ <code>Generator</code>
+Create a generator with the given config.
+Similar to calling `generator.Base.extend()`,
+but it will automatically includes easily helper during initializing phase
+and save all props to config during configuring phase.
+If the config overwrites any or these two phase, you will have to add these extra lines of code
+to maintain the same behavior.
+
+**Kind**: static method of <code>[Easily](#Easily)</code>  
+**Returns**: <code>Generator</code> - a generator created from the given config  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| config | <code>object</code> | Yeoman configuration that is usually passed to generator.Base.extend() |
+
