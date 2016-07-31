@@ -50,7 +50,7 @@ module.exports = BaseWithEasily.extend({
   },
 
   install: function () {
-    this.installDependencies({bower: false});
+    this.installDependencies();
   }
 });
 

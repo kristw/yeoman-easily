@@ -61,9 +61,12 @@
   },
   "repository": "kristw/yeoman-easily",
   "scripts": {
+    "build": "gulp prepublish",
     "prepublish": "gulp prepublish",
     "test": "gulp",
-    "docs": "jsdoc2md lib/*.js > docs/api.md"
+    "docs": "jsdoc2md lib/*.js > docs/api.md",
+    "version": "npm run build && npm run docs && git add -A dist && git add -A docs",
+    "postversion": "git push ; git push --tags"
   },
   "license": "Apache-2.0"
 }
