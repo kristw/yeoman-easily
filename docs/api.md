@@ -28,7 +28,7 @@ Class that provides convenient functions for a Yeoman generator.
         * [.templateExists(filePath)](#Easily+templateExists) ⇒ <code>boolean</code>
         * [.destinationExists(filePath)](#Easily+destinationExists) ⇒ <code>boolean</code>
         * [.listTemplateFiles(pattern, ignore)](#Easily+listTemplateFiles) ⇒ <code>Array.&lt;string&gt;</code>
-        * [.copyFiles(pattern)](#Easily+copyFiles) ⇒ <code>[Easily](#Easily)</code>
+        * [.copyFiles(pattern, options)](#Easily+copyFiles) ⇒ <code>[Easily](#Easily)</code>
         * [.savePropsToConfig()](#Easily+savePropsToConfig) ⇒ <code>[Easily](#Easily)</code>
         * [.learnPrompts(prompts)](#Easily+learnPrompts) ⇒ <code>[Easily](#Easily)</code>
         * [.findPrompt(prompt)](#Easily+findPrompt) ⇒ <code>Object</code>
@@ -306,7 +306,7 @@ List files in the template directory
 
 <a name="Easily+copyFiles"></a>
 
-### easily.copyFiles(pattern) ⇒ <code>[Easily](#Easily)</code>
+### easily.copyFiles(pattern, options) ⇒ <code>[Easily](#Easily)</code>
 Copy files from template directory to destination directory.
 Files with static content are copied directly.
 Files with dynamic content are created using the template and given props.
@@ -317,6 +317,7 @@ Files with dynamic content are created using the template and given props.
 | Param | Type | Description |
 | --- | --- | --- |
 | pattern | <code>string</code> | glob pattern for the files |
+| options | <code>Object</code> | options |
 | options.ignore | <code>Array.&lt;string&gt;</code> | glob pattern(s) to ignore |
 | options.dynamicFiles | <code>Array.&lt;string&gt;</code> | array of files with dynamic content (need templating) |
 | options.props | <code>Object</code> | properties for creating dynamic content |
