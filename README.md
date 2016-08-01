@@ -1,5 +1,20 @@
 # yeoman-easily [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
-> Ways to use yeoman more easily
+
+This library was created to facilitate the following tasks when creating a generator with Yeoman:
+
+- **Confirmation**:
+	- Can ask for confirmation before proceeding in one line. `easily.confirmBeforeStart(message)`
+	- `easily.checkForConfirmation()` simply returns the result.
+- **Prompting**:
+	- Handle storing user's input from the prompts into `this.props`. Just call `easily.prompt(prompts)` instead of the `this.prompt(prompts, ...)`
+	- Can automatically skip prompts if an option with the same name is presence. It will instead copy the value of existing `this.option[field]` into `this.props[field]`.
+	- Can register common prompts and allow looking up prompts by name. This can save a lot of time if you create a few generators that ask similar questions.
+- **Composing**: with another generator, either local or external
+	- Simplify the syntax to `easily.composeWithLocal(name, namespace, options)` and `easily.composeWithExternal(package, namespace, options)`
+- **File handling**:
+	- Provide functions for mass copying both static and dynamic files based on glob pattern. See `easily.copyFiles(...)`
+	- Provide I/O functions that wraps `this.fs.xxx` and also resolve *template* and *destination* directory.
+- **Method chaining**: yeoman-easily was created with chaining in mind and support method chaining for fluent coding.
 
 ## Installation
 
@@ -7,7 +22,7 @@
 $ npm install --save yeoman-easily
 ```
 
-## Usage
+## Example Usage
 
 ```js
 'use strict';
@@ -45,6 +60,24 @@ module.exports = Easily.createGenerator({
           '__bower.json',
           'bower.json',
           this.props
+        )
+        .copyFiles('**/*', {
+         ignore: '**/__*',
+          dynamicFiles: [
+            'src/index.html',
+            'gulpfile.babel.js',
+            'README.md'
+          ],
+          props: props
+        })
+        .composeWithExternal(
+          'generator-summon/generators/github',
+          'summon:github',
+          {
+            skipGreeting: true,
+            name: this.props.name,
+            githubAccount: this.props.githubAccount
+          }
         );
     }
   },
@@ -56,13 +89,11 @@ module.exports = Easily.createGenerator({
 
 ```
 
-## API Documenation
+## More resources
 
-See [documentation](docs/api.md)
-
-## Generator
-
-For convenience, you can use [generator-easily](https://github.com/kristw/generator-easily) instead of the standard [generator-generator](https://github.com/yeoman/generator-generator) to create a new generator or subgenerator. The created generator/subgenerator will include code for using yeoman-easily by default.
+- See [full API documentation](https://github.com/kristw/yeoman-easily/blob/master/docs/api.md)
+- An example generator that uses yeoman-easily heavily is [generator-summon](https://github.com/kristw/generator-summon)
+- For convenience, you can use [generator-easily](https://github.com/kristw/generator-easily) instead of the standard [generator-generator](https://github.com/yeoman/generator-generator) to create a new *generator* or *subgenerator*. The created generator/subgenerator will include code for using yeoman-easily by default.
 
 ## License
 
