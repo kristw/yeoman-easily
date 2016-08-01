@@ -13,11 +13,11 @@ $ npm install --save yeoman-easily
 'use strict';
 
 var ye = require('yeoman-easily');
-var BaseWithEasily = ye.BaseWithEasily;
+var Easily = ye.Easily;
 var commonPrompts = ye.prompts;
 var chalk = require('chalk');
 
-module.exports = BaseWithEasily.extend({
+module.exports = Easily.createGenerator({
   prompting: function () {
     return this.easily
       .greet('Welcome to the awesome generator!')
@@ -55,6 +55,15 @@ module.exports = BaseWithEasily.extend({
 });
 
 ```
+
+## API Documenation
+
+See [documentation](docs/api.md)
+
+## Generator
+
+For convenience, you can use [generator-easily](https://github.com/kristw/generator-easily) instead of the standard [generator-generator](https://github.com/yeoman/generator-generator) to create a new generator or subgenerator. The created generator/subgenerator will include code for using yeoman-easily by default.
+
 ## License
 
 Apache-2.0 © [Krist Wongsuphasawat](http://kristw.yellowpigz.com)
