@@ -40,7 +40,7 @@ Class that provides convenient functions for a Yeoman generator.
 <a name="new_Easily_new"></a>
 
 ### new Easily(generator)
-Create an Easily object for the specified generator
+Create an Easily object for the specified `generator`
 
 
 | Param | Type | Description |
@@ -81,8 +81,8 @@ Check if the user has confirmed or not
 <a name="Easily+setResolver"></a>
 
 ### easily.setResolver(resolve) ⇒ <code>[Easily](#Easily)</code>
-Set this to require.resolve
-before using composeWithLocal or composeWithExternal
+Set this to `require.resolve`
+before using `composeWithLocal` or `composeWithExternal`
 to resolve path correctly
 
 **Kind**: instance method of <code>[Easily](#Easily)</code>  
@@ -368,7 +368,7 @@ Find prompts from the given list of prompt names.
 <a name="Easily+prompt"></a>
 
 ### easily.prompt(prompts, showWhenNoOptionWithTheSameName) ⇒ <code>Promise</code>
-Show prompts and stored user input in `generator.props`
+Show prompts and stored user input in `this.generator.props`
 
 **Kind**: instance method of <code>[Easily](#Easily)</code>  
 **Returns**: <code>Promise</code> - A promise returned from `generator.prompt`  
@@ -385,8 +385,6 @@ Create a generator with the given config.
 Similar to calling `generator.Base.extend()`,
 but it will automatically includes easily helper during initializing phase
 and save all props to config during configuring phase.
-If the config overwrites any or these two phase, you will have to add these extra lines of code
-to maintain the same behavior.
 
 **Kind**: static method of <code>[Easily](#Easily)</code>  
 **Returns**: <code>Generator</code> - a generator created from the given config  
@@ -395,3 +393,35 @@ to maintain the same behavior.
 | --- | --- | --- |
 | config | <code>object</code> | Yeoman configuration that is usually passed to generator.Base.extend() |
 
+**Example** *(General usage)*  
+```js
+
+module.exports = Easily.createGenerator({
+  prompting: {
+    // do something
+  },
+  writing: {
+    // do something
+  }
+});
+```
+**Example** *(Advanced usage)*  
+```js
+
+// If the config overwrites any of these two phases
+// (initializing, configuring),
+// you will have to add these extra lines of code
+// to maintain the same behavior.
+module.exports = Easily.createGenerator({
+  initializing: function () {
+    this.easily = new Easily(this);
+    // do the extra
+  },
+  ...
+  configuring: function () {
+    this.easily.savePropsToConfig();
+    // do the extra
+  },
+  ...
+});
+```
