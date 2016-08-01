@@ -7,8 +7,8 @@ This library was created to facilitate the following tasks when creating a gener
 	- `easily.checkForConfirmation()` simply returns the result.
 - **Prompting**:
 	- Handle storing user's input from the prompts into `this.props`. Just call `easily.prompt(prompts)` instead of the `this.prompt(prompts, ...)`
-	- Can automatically skip prompts if an option with the same name is presence. It will instead copy the value of existing `this.option[field]` into `this.props[field]`.
-	- Can register common prompts and allow looking up prompts by name. This can save a lot of time if you create a few generators that ask similar questions.
+	- Can automatically skip prompts if an option with the same name is present. It will instead copy the value of existing `this.option[field]` into `this.props[field]`.
+	- Can register common prompts via `easily.learnPrompts(prompts)` and allow looking up prompts by name while calling `easily.prompt()`. This can save a lot of time if you create multiple generators that ask similar questions.
 - **Composing**: with another generator, either local or external
 	- Simplify the syntax to `easily.composeWithLocal(name, namespace, options)` and `easily.composeWithExternal(package, namespace, options)`
 - **File handling**:
@@ -65,7 +65,6 @@ module.exports = Easily.createGenerator({
          ignore: '**/__*',
           dynamicFiles: [
             'src/index.html',
-            'gulpfile.babel.js',
             'README.md'
           ],
           props: props
